@@ -12,7 +12,6 @@
  *  * Rewrote encode() to be non-recursive; also simplified the logic
  *  * Rewrote decode()
  */
-/// <reference types="node" />
 declare function encode(type: any, data: any, ...args: any[]): Buffer;
 declare function decode(data: any): {};
 declare const _default: {

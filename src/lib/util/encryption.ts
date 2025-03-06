@@ -1,4 +1,4 @@
-import { api as Sodium } from 'sodium';
+import { api as Sodium } from 'sodium-native';
 import * as crypto from 'crypto';
 
 import number from './number';

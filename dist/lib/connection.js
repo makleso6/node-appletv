@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Connection = void 0;
 const net_1 = require("net");
 const protobufjs_1 = require("protobufjs");
 const uuid_1 = require("uuid");
@@ -56,7 +57,7 @@ class Connection extends events_1.EventEmitter /* <Connection.Events> */ {
     }
     open() {
         let that = this;
-        return protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
+        return (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
             .then(root => {
             that.ProtocolMessage = root.lookupType("ProtocolMessage");
             return new Promise((resolve, reject) => {
@@ -71,7 +72,7 @@ class Connection extends events_1.EventEmitter /* <Connection.Events> */ {
     }
     sendBlank(typeName, waitForResponse, credentials) {
         let that = this;
-        return protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
+        return (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
             .then(root => {
             let ProtocolMessage = root.lookupType("ProtocolMessage");
             let types = ProtocolMessage.lookupEnum("Type");
@@ -105,7 +106,7 @@ class Connection extends events_1.EventEmitter /* <Connection.Events> */ {
         return new Promise((resolve, reject) => {
             let ProtocolMessage = message.$type;
             if (waitForResponse) {
-                let identifier = uuid_1.v4();
+                let identifier = (0, uuid_1.v4)();
                 message["identifier"] = identifier;
                 let callback = (message) => {
                     resolve(message);
@@ -135,7 +136,7 @@ class Connection extends events_1.EventEmitter /* <Connection.Events> */ {
     }
     decodeMessage(data) {
         let that = this;
-        return protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
+        return (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"))
             .then(root => {
             let ProtocolMessage = root.lookupType("ProtocolMessage");
             let preMessage = ProtocolMessage.decode(data);
@@ -144,7 +145,7 @@ class Connection extends events_1.EventEmitter /* <Connection.Events> */ {
                 return Promise.resolve(preMessage);
             }
             let name = type[0].toUpperCase() + camelcase(type).substring(1);
-            return protobufjs_1.load(path.resolve(__dirname + "/protos/" + name + ".proto"))
+            return (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/" + name + ".proto"))
                 .then(root => {
                 let ProtocolMessage = root.lookupType("ProtocolMessage");
                 let message = ProtocolMessage.decode(data);

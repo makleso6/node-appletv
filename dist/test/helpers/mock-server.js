@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MockServer = void 0;
 const net_1 = require("net");
 const appletv_1 = require("../../lib/appletv");
 const connection_1 = require("../../lib/connection");
@@ -17,7 +18,7 @@ class MockServer {
         let d = this.device;
         let that = this;
         this.message = new Promise(function (resolve, reject) {
-            that.server = net_1.createServer(function (socket) {
+            that.server = (0, net_1.createServer)(function (socket) {
                 let connection = new connection_1.Connection(d, socket);
                 d.connection = connection;
                 d.on('message', function (message) {

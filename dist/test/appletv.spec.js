@@ -51,8 +51,8 @@ describe('apple tv tests', function () {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.device.openConnection();
             let messages = this.sentMessages();
-            chai_1.expect(messages.length).to.equal(1);
-            chai_1.expect(messages[0].type).to.equal(message_1.Message.Type.DeviceInfoMessage);
+            (0, chai_1.expect)(messages.length).to.equal(1);
+            (0, chai_1.expect)(messages[0].type).to.equal(message_1.Message.Type.DeviceInfoMessage);
         });
     });
     it('should request artwork', function () {
@@ -65,12 +65,12 @@ describe('apple tv tests', function () {
             }
             catch (error) { }
             let messages = this.sentMessages();
-            chai_1.expect(messages.length).to.equal(2);
-            chai_1.expect(messages[1].type).to.equal(message_1.Message.Type.PlaybackQueueRequestMessage);
-            chai_1.expect(messages[1].payload.artworkWidth).to.equal(width);
-            chai_1.expect(messages[1].payload.artworkHeight).to.equal(height);
-            chai_1.expect(messages[1].payload.length).to.equal(1);
-            chai_1.expect(messages[1].payload.location).to.equal(0);
+            (0, chai_1.expect)(messages.length).to.equal(2);
+            (0, chai_1.expect)(messages[1].type).to.equal(message_1.Message.Type.PlaybackQueueRequestMessage);
+            (0, chai_1.expect)(messages[1].payload.artworkWidth).to.equal(width);
+            (0, chai_1.expect)(messages[1].payload.artworkHeight).to.equal(height);
+            (0, chai_1.expect)(messages[1].payload.length).to.equal(1);
+            (0, chai_1.expect)(messages[1].payload.location).to.equal(0);
         });
     });
     it('should press and release menu', function () {
@@ -78,9 +78,9 @@ describe('apple tv tests', function () {
             yield this.device.openConnection();
             yield this.device.sendKeyCommand(appletv_1.AppleTV.Key.Menu);
             let messages = this.sentMessages();
-            chai_1.expect(messages.length).to.equal(3);
-            chai_1.expect(messages[1].type).to.equal(message_1.Message.Type.SendHidEventMessage);
-            chai_1.expect(messages[2].type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)(messages.length).to.equal(3);
+            (0, chai_1.expect)(messages[1].type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)(messages[2].type).to.equal(message_1.Message.Type.SendHidEventMessage);
         });
     });
     it('should read now playing', function () {
@@ -90,10 +90,10 @@ describe('apple tv tests', function () {
             this.device.on('nowPlaying', spy);
             this.device.connection.emit('message', require('./fixtures/now-playing.json'));
             let messages = this.sentMessages();
-            chai_1.expect(messages.length).to.equal(1);
-            chai_1.expect(spy.lastCall.lastArg.title).to.equal('Seinfeld');
-            chai_1.expect(spy.lastCall.lastArg.appDisplayName).to.equal('Hulu');
-            chai_1.expect(spy.lastCall.lastArg.appBundleIdentifier).to.equal('com.hulu.plus');
+            (0, chai_1.expect)(messages.length).to.equal(1);
+            (0, chai_1.expect)(spy.lastCall.lastArg.title).to.equal('Seinfeld');
+            (0, chai_1.expect)(spy.lastCall.lastArg.appDisplayName).to.equal('Hulu');
+            (0, chai_1.expect)(spy.lastCall.lastArg.appBundleIdentifier).to.equal('com.hulu.plus');
         });
     });
 });

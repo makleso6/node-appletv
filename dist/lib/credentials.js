@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Credentials = void 0;
 const encryption_1 = require("./util/encryption");
 const number_1 = require("./util/number");
 class Credentials {

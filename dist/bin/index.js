@@ -20,7 +20,7 @@ const util_1 = require("util");
 const project = require('../../package.json');
 function openDevice(credentials, logger) {
     return __awaiter(this, void 0, void 0, function* () {
-        let device = yield scan_1.scan(logger, null, credentials.uniqueIdentifier);
+        let device = yield (0, scan_1.scan)(logger, null, credentials.uniqueIdentifier);
         device.on('debug', (message) => {
             logger.debug(message);
         });
@@ -37,7 +37,7 @@ cli
     .option('--timeout <timeout>', 'The amount of time (in seconds) to scan for Apple TVs', cli.INTEGER)
     .action((args, options, logger) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let device = yield scan_1.scan(logger, options.timeout);
+        let device = yield (0, scan_1.scan)(logger, options.timeout);
         device.on('debug', (message) => {
             logger.debug(message);
         });
@@ -45,7 +45,7 @@ cli
             logger.error(error.message);
             logger.debug(error.stack);
         });
-        let keys = yield pair_1.pair(device, logger);
+        let keys = yield (0, pair_1.pair)(device, logger);
         logger.info("Credentials: " + device.credentials.toString());
         process.exit();
     }
@@ -91,7 +91,7 @@ cli
         let device = yield openDevice(credentials, logger);
         let data = yield device.requestArtwork();
         if (options.output) {
-            yield util_1.promisify(fs_1.writeFile)(options.output, data);
+            yield (0, util_1.promisify)(fs_1.writeFile)(options.output, data);
         }
         else {
             logger.info(data.toString('hex'));

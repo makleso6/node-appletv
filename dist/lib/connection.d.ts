@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Socket } from 'net';
 import { Message as ProtoMessage } from 'protobufjs';
 import { EventEmitter } from 'events';
@@ -25,7 +24,7 @@ export declare class Connection extends EventEmitter {
     handleChunk(data: Buffer): Promise<Message>;
     private setupListeners;
 }
-export declare module Connection {
+export declare namespace Connection {
     interface Events {
         connect: void;
         message: Message;

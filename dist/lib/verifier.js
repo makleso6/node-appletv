@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Verifier = void 0;
 const ed25519 = require("ed25519");
 const curve25519 = require("curve25519-n2");
 const tlv_1 = require("./util/tlv");

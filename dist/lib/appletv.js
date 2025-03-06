@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppleTV = void 0;
 const path = require("path");
 const protobufjs_1 = require("protobufjs");
 const uuid_1 = require("uuid");
@@ -24,7 +25,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     constructor(service, socket) {
         super();
         this.service = service;
-        this.pairingId = uuid_1.v4();
+        this.pairingId = (0, uuid_1.v4)();
         this.service = service;
         this.name = service.txtRecord.Name;
         this.address = service.addresses.filter(x => x.includes('.'))[0];
@@ -87,9 +88,9 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     * @param waitForResponse  Whether or not to wait for a response before resolving the Promise.
     * @returns A promise that resolves to the response from the AppleTV.
     */
-    sendMessage(definitionFilename, messageType, body, waitForResponse, priority = 0) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let root = yield protobufjs_1.load(path.resolve(__dirname + "/protos/" + definitionFilename + ".proto"));
+    sendMessage(definitionFilename_1, messageType_1, body_1, waitForResponse_1) {
+        return __awaiter(this, arguments, void 0, function* (definitionFilename, messageType, body, waitForResponse, priority = 0) {
+            let root = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/" + definitionFilename + ".proto"));
             let type = root.lookupType(messageType);
             let message = yield type.create(body);
             return this.connection.send(message, waitForResponse, priority, this.credentials);
@@ -132,9 +133,9 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     * @param height Image height
     * @returns A Promise that resolves to a Buffer of data.
     */
-    requestArtwork(width = 400, height = 400) {
-        var _a, _b, _c, _d, _e;
-        return __awaiter(this, void 0, void 0, function* () {
+    requestArtwork() {
+        return __awaiter(this, arguments, void 0, function* (width = 400, height = 400) {
+            var _a, _b, _c, _d;
             let response = yield this.requestPlaybackQueueWithWait({
                 artworkSize: {
                     width: width,
@@ -143,7 +144,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
                 length: 1,
                 location: 0
             }, true);
-            let data = (_e = (_d = (_c = (_b = (_a = response) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.playbackQueue) === null || _c === void 0 ? void 0 : _c.contentItems) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.artworkData;
+            let data = (_d = (_c = (_b = (_a = response === null || response === void 0 ? void 0 : response.payload) === null || _a === void 0 ? void 0 : _a.playbackQueue) === null || _b === void 0 ? void 0 : _b.contentItems) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.artworkData;
             if (data) {
                 return data;
             }
@@ -224,7 +225,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     }
     requestPlaybackQueueWithWait(options, waitForResponse) {
         var params = options;
-        params.requestID = uuid_1.v4();
+        params.requestID = (0, uuid_1.v4)();
         if (options.artworkSize) {
             params.artworkWidth = options.artworkSize.width;
             params.artworkHeight = options.artworkSize.height;
@@ -249,7 +250,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     }
     sendConnectionState() {
         let that = this;
-        return protobufjs_1.load(path.resolve(__dirname + "/protos/SetConnectionStateMessage.proto"))
+        return (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/SetConnectionStateMessage.proto"))
             .then(root => {
             let type = root.lookupType('SetConnectionStateMessage');
             let stateEnum = type.lookupEnum('ConnectionState');
@@ -415,4 +416,4 @@ exports.AppleTV = AppleTV;
         }
     }
     AppleTV.key = key;
-})(AppleTV = exports.AppleTV || (exports.AppleTV = {}));
+})(AppleTV || (exports.AppleTV = AppleTV = {}));

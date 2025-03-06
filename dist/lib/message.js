@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Message = void 0;
 class Message {
     constructor(message) {
         this.message = message;
@@ -63,4 +64,4 @@ exports.Message = Message;
         Type[Type["PlaybackQueueCapabilitiesRequest"] = 45] = "PlaybackQueueCapabilitiesRequest";
         Type[Type["ModifyOutputContextRequest"] = 46] = "ModifyOutputContextRequest";
     })(Type = Message.Type || (Message.Type = {}));
-})(Message = exports.Message || (exports.Message = {}));
+})(Message || (exports.Message = Message = {}));

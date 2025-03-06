@@ -1,19 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SupportedCommand = exports.Message = exports.Credentials = exports.NowPlayingInfo = exports.Browser = exports.Connection = exports.AppleTV = void 0;
+exports.scan = scan;
+exports.parseCredentials = parseCredentials;
 const credentials_1 = require("./lib/credentials");
-exports.Credentials = credentials_1.Credentials;
+Object.defineProperty(exports, "Credentials", { enumerable: true, get: function () { return credentials_1.Credentials; } });
 const appletv_1 = require("./lib/appletv");
-exports.AppleTV = appletv_1.AppleTV;
+Object.defineProperty(exports, "AppleTV", { enumerable: true, get: function () { return appletv_1.AppleTV; } });
 const connection_1 = require("./lib/connection");
-exports.Connection = connection_1.Connection;
+Object.defineProperty(exports, "Connection", { enumerable: true, get: function () { return connection_1.Connection; } });
 const browser_1 = require("./lib/browser");
-exports.Browser = browser_1.Browser;
+Object.defineProperty(exports, "Browser", { enumerable: true, get: function () { return browser_1.Browser; } });
 const now_playing_info_1 = require("./lib/now-playing-info");
-exports.NowPlayingInfo = now_playing_info_1.NowPlayingInfo;
+Object.defineProperty(exports, "NowPlayingInfo", { enumerable: true, get: function () { return now_playing_info_1.NowPlayingInfo; } });
 const message_1 = require("./lib/message");
-exports.Message = message_1.Message;
+Object.defineProperty(exports, "Message", { enumerable: true, get: function () { return message_1.Message; } });
 const supported_command_1 = require("./lib/supported-command");
-exports.SupportedCommand = supported_command_1.SupportedCommand;
+Object.defineProperty(exports, "SupportedCommand", { enumerable: true, get: function () { return supported_command_1.SupportedCommand; } });
 /**
 * A convenience function to scan for AppleTVs on the local network.
 * @param uniqueIdentifier  An optional identifier for the AppleTV to scan for. The AppleTV advertises this via Bonjour.
@@ -24,7 +27,6 @@ function scan(uniqueIdentifier, timeout) {
     let browser = new browser_1.Browser();
     return browser.scan(uniqueIdentifier, timeout);
 }
-exports.scan = scan;
 /**
 * A convenience function to parse a credentials string into a Credentials object.
 * @param text  The credentials string.
@@ -33,4 +35,3 @@ exports.scan = scan;
 function parseCredentials(text) {
     return credentials_1.Credentials.parse(text);
 }
-exports.parseCredentials = parseCredentials;

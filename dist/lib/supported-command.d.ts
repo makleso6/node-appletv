@@ -4,7 +4,7 @@ export declare class SupportedCommand {
     canScrub: boolean;
     constructor(command: keyof typeof SupportedCommand.Command, enabled: boolean, canScrub: boolean);
 }
-export declare module SupportedCommand {
+export declare namespace SupportedCommand {
     enum Command {
         Play = "Play",
         Pause = "Pause",

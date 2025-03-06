@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pairing = void 0;
 const srp = require("fast-srp-hap");
 const crypto = require("crypto");
 const ed25519 = require("ed25519");

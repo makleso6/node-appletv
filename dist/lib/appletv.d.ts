@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Service } from 'mdns';
 import { EventEmitter } from 'events';
 import { Socket } from 'net';
@@ -99,7 +98,7 @@ export declare class AppleTV extends EventEmitter {
     private onRemoveListener;
     private setupListeners;
 }
-export declare module AppleTV {
+export declare namespace AppleTV {
     interface Events {
         connect: void;
         nowPlaying: NowPlayingInfo;
@@ -111,7 +110,7 @@ export declare module AppleTV {
         debug: string;
     }
 }
-export declare module AppleTV {
+export declare namespace AppleTV {
     /** An enumeration of key presses available.
     */
     enum Key {

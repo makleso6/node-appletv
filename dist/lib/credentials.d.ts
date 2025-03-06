@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare class Credentials {
     uniqueIdentifier: string;
     identifier: Buffer;
