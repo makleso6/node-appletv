@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events';
 import { TVClient } from '../tvclient';
 import { Message } from '../message';

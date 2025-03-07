@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pair = pair;
 const inquirer_1 = require("inquirer");
 const ora = require("ora");
 function pair(device, logger) {
@@ -11,7 +12,7 @@ function pair(device, logger) {
         return device.pair()
             .then(callback => {
             spinner.succeed();
-            return inquirer_1.prompt([{
+            return (0, inquirer_1.prompt)([{
                     type: 'input',
                     name: 'pin',
                     message: "Enter the 4-digit pin that's currently being displayed on " + device.name,
@@ -35,4 +36,3 @@ function pair(device, logger) {
         });
     });
 }
-exports.pair = pair;

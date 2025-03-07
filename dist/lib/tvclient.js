@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TVClient = void 0;
 const path = require("path");
 const protobufjs_1 = require("protobufjs");
 const uuid_1 = require("uuid");
@@ -53,7 +54,7 @@ class TVClient extends appletv_1.AppleTV {
                 this.uid = credentials.localUid.toString();
             }
             this.credentials = credentials;
-            let root = yield protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
+            let root = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
             this.ProtocolMessage = root.lookupType("ProtocolMessage");
             yield this.openSocket();
             yield this.sendIntroduction(this.socket, {
@@ -124,9 +125,9 @@ class TVClient extends appletv_1.AppleTV {
     * @param height Image height
     * @returns A Promise that resolves to a Buffer of data.
     */
-    requestArtwork(width = 400, height = 400) {
-        var _a, _b, _c, _d, _e;
-        return __awaiter(this, void 0, void 0, function* () {
+    requestArtwork() {
+        return __awaiter(this, arguments, void 0, function* (width = 400, height = 400) {
+            var _a, _b, _c, _d;
             let response = yield this.requestPlaybackQueueWithWait({
                 artworkSize: {
                     width: width,
@@ -135,7 +136,7 @@ class TVClient extends appletv_1.AppleTV {
                 length: 1,
                 location: 0
             }, true);
-            let data = (_e = (_d = (_c = (_b = (_a = response) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.playbackQueue) === null || _c === void 0 ? void 0 : _c.contentItems) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.artworkData;
+            let data = (_d = (_c = (_b = (_a = response === null || response === void 0 ? void 0 : response.payload) === null || _a === void 0 ? void 0 : _a.playbackQueue) === null || _b === void 0 ? void 0 : _b.contentItems) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.artworkData;
             if (data) {
                 return data;
             }
@@ -237,7 +238,7 @@ class TVClient extends appletv_1.AppleTV {
     requestPlaybackQueueWithWait(options, waitForResponse) {
         return __awaiter(this, void 0, void 0, function* () {
             var params = options;
-            params.requestID = uuid_1.v4();
+            params.requestID = (0, uuid_1.v4)();
             if (options.artworkSize) {
                 params.artworkWidth = options.artworkSize.width;
                 params.artworkHeight = options.artworkSize.height;

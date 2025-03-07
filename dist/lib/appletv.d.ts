@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Type, Message as ProtoMessage } from 'protobufjs';
 import { EventEmitter } from 'events';
 import { Socket } from 'net';
@@ -90,7 +89,7 @@ export declare class AppleTV extends EventEmitter {
     sendIntroduction(socket: Socket, parameters: any, identifier?: string): Promise<Message>;
     private decodeMessage;
 }
-export declare module AppleTV {
+export declare namespace AppleTV {
     interface Events {
         connect: void;
         message: Message;
@@ -102,7 +101,7 @@ export declare module AppleTV {
         playbackQueue: any;
     }
 }
-export declare module AppleTV {
+export declare namespace AppleTV {
     /** An enumeration of key presses available.
     */
     enum Key {

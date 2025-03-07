@@ -1,4 +1,3 @@
-/// <reference types="node" />
 declare function UInt53toBufferLE(number: number): Buffer;
 declare function UInt16toBufferBE(number: number): Buffer;
 declare function uintHighLow(number: number): [number, number];

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Browser = void 0;
 const mdns = require("mdns");
 const tvclient_1 = require("./tvclient");
 class Browser {

@@ -29,10 +29,10 @@ describe('apple tv discovery', function () {
             ad.start();
             let browser = new browser_1.Browser();
             let devices = yield browser.scan(AppleTVIdentifier);
-            chai_1.expect(devices.length).to.be.greaterThan(0);
+            (0, chai_1.expect)(devices.length).to.be.greaterThan(0);
             let device = devices[0];
-            chai_1.expect(device.remoteUid).to.equal(AppleTVIdentifier);
-            chai_1.expect(device.name).to.equal(AppleTVName);
+            (0, chai_1.expect)(device.remoteUid).to.equal(AppleTVIdentifier);
+            (0, chai_1.expect)(device.name).to.equal(AppleTVName);
             ad.stop();
         });
     });

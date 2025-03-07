@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SRPClientSession = exports.SRPClientAuth = exports.SRPServerSession = exports.SRPServerAuth = void 0;
 const server_auth_1 = require("./server-auth");
-exports.SRPServerAuth = server_auth_1.SRPServerAuth;
+Object.defineProperty(exports, "SRPServerAuth", { enumerable: true, get: function () { return server_auth_1.SRPServerAuth; } });
 const server_session_1 = require("./server-session");
-exports.SRPServerSession = server_session_1.SRPServerSession;
+Object.defineProperty(exports, "SRPServerSession", { enumerable: true, get: function () { return server_session_1.SRPServerSession; } });
 const client_auth_1 = require("./client-auth");
-exports.SRPClientAuth = client_auth_1.SRPClientAuth;
+Object.defineProperty(exports, "SRPClientAuth", { enumerable: true, get: function () { return client_auth_1.SRPClientAuth; } });
 const client_session_1 = require("./client-session");
-exports.SRPClientSession = client_session_1.SRPClientSession;
+Object.defineProperty(exports, "SRPClientSession", { enumerable: true, get: function () { return client_session_1.SRPClientSession; } });

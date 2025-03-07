@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Service } from 'mdns';
 import { Socket } from 'net';
 import { AppleTV, PlaybackQueueRequestOptions, SendProtocolMessageOptions, SendMessageOptions } from './appletv';

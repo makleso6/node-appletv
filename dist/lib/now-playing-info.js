@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.NowPlayingInfo = void 0;
 class NowPlayingInfo {
     constructor(message) {
         this.message = message;
@@ -52,4 +53,4 @@ exports.NowPlayingInfo = NowPlayingInfo;
         State["Playing"] = "playing";
         State["Paused"] = "paused";
     })(State = NowPlayingInfo.State || (NowPlayingInfo.State = {}));
-})(NowPlayingInfo = exports.NowPlayingInfo || (exports.NowPlayingInfo = {}));
+})(NowPlayingInfo || (exports.NowPlayingInfo = NowPlayingInfo = {}));

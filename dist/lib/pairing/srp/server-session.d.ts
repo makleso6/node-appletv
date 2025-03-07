@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { SRPBase } from './base';
 import { KeyPair } from '../../credentials-store';
 export declare class SRPServerSession extends SRPBase {

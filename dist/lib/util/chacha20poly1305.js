@@ -1,6 +1,32 @@
 "use strict";
 /* chacha20 - 256 bits */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AeadCtx = exports.Poly1305Ctx = exports.Chacha20Ctx = void 0;
+exports.load32 = load32;
+exports.store32 = store32;
+exports.plus = plus;
+exports.rotl32 = rotl32;
+exports.quarterRound = quarterRound;
+exports.chacha20_keysetup = chacha20_keysetup;
+exports.chacha20_ivsetup = chacha20_ivsetup;
+exports.chacha20_encrypt = chacha20_encrypt;
+exports.chacha20_decrypt = chacha20_decrypt;
+exports.chacha20_update = chacha20_update;
+exports.chacha20_final = chacha20_final;
+exports.chacha20_keystream = chacha20_keystream;
+exports.U8TO16 = U8TO16;
+exports.U16TO8 = U16TO8;
+exports.poly1305_init = poly1305_init;
+exports.poly1305_blocks = poly1305_blocks;
+exports.poly1305_update = poly1305_update;
+exports.poly1305_finish = poly1305_finish;
+exports.poly1305_auth = poly1305_auth;
+exports.poly1305_verify = poly1305_verify;
+exports.aead_init = aead_init;
+exports.store64 = store64;
+exports.aead_mac = aead_mac;
+exports.aead_encrypt = aead_encrypt;
+exports.aead_decrypt = aead_decrypt;
 // Written in 2014 by Devi Mandiri. Public domain.
 //
 // Implementation derived from chacha-ref.c version 20080118
@@ -18,7 +44,6 @@ exports.Chacha20Ctx = Chacha20Ctx;
 function load32(x, i) {
     return x[i] | (x[i + 1] << 8) | (x[i + 2] << 16) | (x[i + 3] << 24);
 }
-exports.load32 = load32;
 function store32(x, i, u) {
     x[i] = u & 0xff;
     u >>>= 8;
@@ -28,15 +53,12 @@ function store32(x, i, u) {
     u >>>= 8;
     x[i + 3] = u & 0xff;
 }
-exports.store32 = store32;
 function plus(v, w) {
     return (v + w) >>> 0;
 }
-exports.plus = plus;
 function rotl32(v, c) {
     return ((v << c) >>> 0) | (v >>> (32 - c));
 }
-exports.rotl32 = rotl32;
 function quarterRound(x, a, b, c, d) {
     x[a] = plus(x[a], x[b]);
     x[d] = rotl32(x[d] ^ x[a], 16);
@@ -47,7 +69,6 @@ function quarterRound(x, a, b, c, d) {
     x[c] = plus(x[c], x[d]);
     x[b] = rotl32(x[b] ^ x[c], 7);
 }
-exports.quarterRound = quarterRound;
 function chacha20_keysetup(ctx, key) {
     ctx.input[0] = 1634760805;
     ctx.input[1] = 857760878;
@@ -57,14 +78,12 @@ function chacha20_keysetup(ctx, key) {
         ctx.input[i + 4] = load32(key, i * 4);
     }
 }
-exports.chacha20_keysetup = chacha20_keysetup;
 function chacha20_ivsetup(ctx, iv) {
     ctx.input[12] = 0;
     ctx.input[13] = 0;
     ctx.input[14] = load32(iv, 0);
     ctx.input[15] = load32(iv, 4);
 }
-exports.chacha20_ivsetup = chacha20_ivsetup;
 function chacha20_encrypt(ctx, dst, src, len) {
     const x = new Array(16);
     const buf = new Array(64);
@@ -106,11 +125,9 @@ function chacha20_encrypt(ctx, dst, src, len) {
         dpos += 64;
     }
 }
-exports.chacha20_encrypt = chacha20_encrypt;
 function chacha20_decrypt(ctx, dst, src, len) {
     chacha20_encrypt(ctx, dst, src, len);
 }
-exports.chacha20_decrypt = chacha20_decrypt;
 function chacha20_update(ctx, dst, src, inlen) {
     let bytes = 0;
     const out_start = 0;
@@ -149,20 +166,17 @@ function chacha20_update(ctx, dst, src, inlen) {
     }
     return out_inc - out_start;
 }
-exports.chacha20_update = chacha20_update;
 function chacha20_final(ctx, dst) {
     if (ctx.leftover != 0) {
         chacha20_encrypt(ctx, dst, ctx.buffer, 64);
     }
     return ctx.leftover;
 }
-exports.chacha20_final = chacha20_final;
 function chacha20_keystream(ctx, dst, len) {
     for (var i = 0; i < len; ++i)
         dst[i] = 0;
     chacha20_encrypt(ctx, dst, dst, len);
 }
-exports.chacha20_keystream = chacha20_keystream;
 /* poly1305 */
 // Written in 2014 by Devi Mandiri. Public domain.
 //
@@ -184,12 +198,10 @@ exports.Poly1305Ctx = Poly1305Ctx;
 function U8TO16(p, pos) {
     return ((p[pos] & 0xff) & 0xffff) | (((p[pos + 1] & 0xff) & 0xffff) << 8);
 }
-exports.U8TO16 = U8TO16;
 function U16TO8(p, pos, v) {
     p[pos] = v & 0xff;
     p[pos + 1] = (v >>> 8) & 0xff;
 }
-exports.U16TO8 = U16TO8;
 function poly1305_init(ctx, key) {
     const t = [];
     let i = 0;
@@ -214,7 +226,6 @@ function poly1305_init(ctx, key) {
     ctx.leftover = 0;
     ctx.finished = 0;
 }
-exports.poly1305_init = poly1305_init;
 function poly1305_blocks(ctx, m, mpos, bytes) {
     const hibit = ctx.finished ? 0 : (1 << 11);
     const t = [];
@@ -258,7 +269,6 @@ function poly1305_blocks(ctx, m, mpos, bytes) {
         bytes -= Poly1305TagSize;
     }
 }
-exports.poly1305_blocks = poly1305_blocks;
 function poly1305_update(ctx, m, bytes) {
     let want = 0;
     let i = 0;
@@ -291,7 +301,6 @@ function poly1305_update(ctx, m, bytes) {
         ctx.leftover += bytes;
     }
 }
-exports.poly1305_update = poly1305_update;
 function poly1305_finish(ctx, mac) {
     const g = [];
     let c = 0;
@@ -361,14 +370,12 @@ function poly1305_finish(ctx, mac) {
         ctx.r[i] = 0;
     }
 }
-exports.poly1305_finish = poly1305_finish;
 function poly1305_auth(mac, m, bytes, key) {
     const ctx = new Poly1305Ctx();
     poly1305_init(ctx, key);
     poly1305_update(ctx, m, bytes);
     poly1305_finish(ctx, mac);
 }
-exports.poly1305_auth = poly1305_auth;
 function poly1305_verify(mac1, mac2) {
     let dif = 0;
     for (let i = 0; i < 16; i++) {
@@ -377,7 +384,6 @@ function poly1305_verify(mac1, mac2) {
     dif = (dif - 1) >>> 31;
     return (dif & 1);
 }
-exports.poly1305_verify = poly1305_verify;
 /* chacha20poly1305 AEAD */
 // Written in 2014 by Devi Mandiri. Public domain.
 // Caveat:
@@ -399,7 +405,6 @@ function aead_init(c20ctx, key, nonce) {
     chacha20_keystream(c20ctx, subkey, 64);
     return subkey.slice(0, 32);
 }
-exports.aead_init = aead_init;
 function store64(dst, pos, num) {
     let hi = 0;
     let lo = num >>> 0;
@@ -426,7 +431,6 @@ function store64(dst, pos, num) {
     hi >>>= 8;
     dst[pos + 7] = hi & 0xff;
 }
-exports.store64 = store64;
 function aead_mac(key, ciphertext, data) {
     const clen = ciphertext.length;
     const dlen = data.length;
@@ -442,7 +446,6 @@ function aead_mac(key, ciphertext, data) {
     poly1305_auth(mac, m, m.length, key);
     return mac;
 }
-exports.aead_mac = aead_mac;
 function aead_encrypt(ctx, nonce, input, ad) {
     const c = new Chacha20Ctx();
     const key = aead_init(c, ctx.key, nonce);
@@ -451,7 +454,6 @@ function aead_encrypt(ctx, nonce, input, ad) {
     const mac = aead_mac(key, ciphertext, ad);
     return [].concat(ciphertext, mac);
 }
-exports.aead_encrypt = aead_encrypt;
 function aead_decrypt(ctx, nonce, ciphertext, ad) {
     const c = new Chacha20Ctx();
     const key = aead_init(c, ctx.key, nonce);
@@ -464,4 +466,3 @@ function aead_decrypt(ctx, nonce, ciphertext, ad) {
     chacha20_decrypt(c, out, ciphertext, clen);
     return out;
 }
-exports.aead_decrypt = aead_decrypt;

@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare class Credentials {
     localUid: string;
     remoteUid: string;

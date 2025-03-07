@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SRPClientAuth = void 0;
 const srp = require("fast-srp-hap");
 const crypto = require("crypto");
 const tweetnacl = require("tweetnacl");
 const base_1 = require("./base");
 const encryption_1 = require("../../util/encryption");
 class SRPClientAuth extends base_1.SRPBase {
+    get serverProof() {
+        return this.srp.computeM2();
+    }
     constructor(pairingId) {
         super();
         this.pairingId = pairingId;
         this.seed = crypto.randomBytes(32);
         this.username = Buffer.from('Pair-Setup');
-    }
-    get serverProof() {
-        return this.srp.computeM2();
     }
     setPassword(password) {
         this.srp = srp.Client(srp.params['3072'], this.salt, this.username, Buffer.from(password), this.seed);

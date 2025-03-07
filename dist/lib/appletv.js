@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppleTV = void 0;
 const path = require("path");
 const varint = require("varint");
 const protobufjs_1 = require("protobufjs");
@@ -27,7 +28,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
         this.callbacks = new Map();
         this.buffer = Buffer.alloc(0);
         this.log = signale.scope('📺', name);
-        this.uid = uid || uuid_1.v4();
+        this.uid = uid || (0, uuid_1.v4)();
         if (process.env.DEBUG) {
             this.on('debug', this.log.debug);
         }
@@ -49,7 +50,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     */
     sendMessage(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let root = yield protobufjs_1.load(path.resolve(__dirname + "/protos/" + (options.filename || options.type) + ".proto"));
+            let root = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/" + (options.filename || options.type) + ".proto"));
             let type = root.lookupType(options.type || options.filename);
             var body;
             if (options.body) {
@@ -97,8 +98,8 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     * @param timeout  The timeout (in seconds).
     * @returns A promise that resolves to the Message.
     */
-    messageOfType(type, timeout = 5) {
-        return __awaiter(this, void 0, void 0, function* () {
+    messageOfType(type_1) {
+        return __awaiter(this, arguments, void 0, function* (type, timeout = 5) {
             let that = this;
             return new Promise((resolve, reject) => {
                 let listener;
@@ -116,8 +117,8 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
             });
         });
     }
-    waitForSequence(sequence, state, socket, timeout = 3) {
-        return __awaiter(this, void 0, void 0, function* () {
+    waitForSequence(sequence_1, state_1, socket_1) {
+        return __awaiter(this, arguments, void 0, function* (sequence, state, socket, timeout = 3) {
             let that = this;
             let handler = (message, resolve) => {
                 let tlvData = tlv_1.default.decode(message.payload.pairingData);
@@ -220,7 +221,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
             return new Promise((resolve, reject) => {
                 let ProtocolMessage = options.message.$type;
                 if (options.waitForResponse && !options.identifier) {
-                    let uid = uuid_1.v4();
+                    let uid = (0, uuid_1.v4)();
                     options.message["identifier"] = uid;
                     let callback = (message) => {
                         resolve(message);
@@ -267,7 +268,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
     }
     decodeMessage(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            let outerRoot = yield protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
+            let outerRoot = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
             let ProtocolMessage = outerRoot.lookupType("ProtocolMessage");
             let preMessage = ProtocolMessage.decode(data);
             let type = preMessage.toJSON().type;
@@ -276,7 +277,7 @@ class AppleTV extends events_1.EventEmitter /* <AppleTV.Events> */ {
                 return preMessage;
             }
             let name = type[0].toUpperCase() + camelcase(type).substring(1);
-            let root = yield protobufjs_1.load(path.resolve(__dirname + "/protos/" + name + ".proto"));
+            let root = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/" + name + ".proto"));
             let message = root.lookupType("ProtocolMessage").decode(data);
             this.emit('debug', "<<<< Received Protobuf=" + (new message_1.Message(message).toString()));
             return message;
@@ -357,4 +358,4 @@ exports.AppleTV = AppleTV;
         }
     }
     AppleTV.key = key;
-})(AppleTV = exports.AppleTV || (exports.AppleTV = {}));
+})(AppleTV || (exports.AppleTV = AppleTV = {}));

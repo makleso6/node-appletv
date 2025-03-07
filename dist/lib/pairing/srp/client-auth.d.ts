@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { SRPBase } from './base';
 export declare class SRPClientAuth extends SRPBase {
     private pairingId;

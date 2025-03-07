@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare class Chacha20Ctx {
     input: any[];
     leftover: number;

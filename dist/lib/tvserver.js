@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TVServer = void 0;
 const mdns = require("mdns");
 const path = require("path");
 const os = require("os");
@@ -22,7 +23,7 @@ const credentials_store_1 = require("./credentials-store");
 const message_1 = require("./message");
 class TVServer extends appletv_1.AppleTV {
     constructor(name, port, uid, server) {
-        super(name, port, uid || uuid_1.v4());
+        super(name, port, uid || (0, uuid_1.v4)());
         this.clients = [];
         this.server = server;
         this.credentialsStore = new credentials_store_1.CredentialsStore(uid);
@@ -44,19 +45,19 @@ class TVServer extends appletv_1.AppleTV {
                 networkInterface: 'en0'
             });
             this.advertisement.start();
-            let root = yield protobufjs_1.load(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
+            let root = yield (0, protobufjs_1.load)(path.resolve(__dirname + "/protos/ProtocolMessage.proto"));
             this.ProtocolMessage = root.lookupType("ProtocolMessage");
             let that = this;
             let listener = (socket) => {
                 that.bindClient(socket);
             };
             if (!this.server) {
-                this.server = net_1.createServer(listener);
+                this.server = (0, net_1.createServer)(listener);
             }
             else {
                 this.server.on('connection', listener);
             }
-            let listen = util_1.promisify(this.server.listen);
+            let listen = (0, util_1.promisify)(this.server.listen);
             yield listen.call(this.server, this.port);
             return this;
         });
@@ -86,11 +87,10 @@ class TVServer extends appletv_1.AppleTV {
     bindClient(socket) {
         let that = this;
         socket.on('data', function (data) {
-            var _a;
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     let client = that.getClient(socket);
-                    yield that.handleChunk(data, socket, (_a = client) === null || _a === void 0 ? void 0 : _a.credentials);
+                    yield that.handleChunk(data, socket, client === null || client === void 0 ? void 0 : client.credentials);
                 }
                 catch (error) {
                     that.emit('error', error);

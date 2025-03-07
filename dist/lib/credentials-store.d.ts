@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Credentials } from './credentials';
 export interface KeyPair {
     signPk: Buffer;

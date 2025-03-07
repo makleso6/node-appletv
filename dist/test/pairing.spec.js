@@ -73,13 +73,13 @@ describe('apple tv pairing', function () {
         return __awaiter(this, void 0, void 0, function* () {
             let sendPin = yield client.pair();
             yield sendPin(server.code);
-            chai_1.expect(server.client.credentials).to.exist;
-            chai_1.expect(client.device.credentials).to.exist;
-            chai_1.expect(server.client.credentials.remoteUid).to.equal(client.device.credentials.localUid);
-            chai_1.expect(server.client.credentials.localUid).to.equal(client.device.credentials.remoteUid);
+            (0, chai_1.expect)(server.client.credentials).to.exist;
+            (0, chai_1.expect)(client.device.credentials).to.exist;
+            (0, chai_1.expect)(server.client.credentials.remoteUid).to.equal(client.device.credentials.localUid);
+            (0, chai_1.expect)(server.client.credentials.localUid).to.equal(client.device.credentials.remoteUid);
             yield client.verify();
-            chai_1.expect(server.client.credentials.readKey.toString('hex')).to.equal(client.device.credentials.writeKey.toString('hex'));
-            chai_1.expect(server.client.credentials.writeKey.toString('hex')).to.equal(client.device.credentials.readKey.toString('hex'));
+            (0, chai_1.expect)(server.client.credentials.readKey.toString('hex')).to.equal(client.device.credentials.writeKey.toString('hex'));
+            (0, chai_1.expect)(server.client.credentials.writeKey.toString('hex')).to.equal(client.device.credentials.readKey.toString('hex'));
         });
     });
 });

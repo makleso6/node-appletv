@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SRPBase = void 0;
 const encryption_1 = require("../../util/encryption");
 class SRPBase {
     decrypt(data, nonce) {

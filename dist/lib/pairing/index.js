@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PairVerifyState = exports.PairSetupState = exports.PairState = exports.PairingClient = exports.PairingServer = void 0;
 const server_1 = require("./server");
-exports.PairingServer = server_1.PairingServer;
+Object.defineProperty(exports, "PairingServer", { enumerable: true, get: function () { return server_1.PairingServer; } });
 const client_1 = require("./client");
-exports.PairingClient = client_1.PairingClient;
+Object.defineProperty(exports, "PairingClient", { enumerable: true, get: function () { return client_1.PairingClient; } });
 const types_1 = require("./types");
-exports.PairState = types_1.PairState;
-exports.PairSetupState = types_1.PairSetupState;
-exports.PairVerifyState = types_1.PairVerifyState;
+Object.defineProperty(exports, "PairState", { enumerable: true, get: function () { return types_1.PairState; } });
+Object.defineProperty(exports, "PairSetupState", { enumerable: true, get: function () { return types_1.PairSetupState; } });
+Object.defineProperty(exports, "PairVerifyState", { enumerable: true, get: function () { return types_1.PairVerifyState; } });

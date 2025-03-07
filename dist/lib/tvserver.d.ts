@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import * as mdns from 'mdns';
 import { Server, Socket } from 'net';
 import { AppleTV } from './appletv';

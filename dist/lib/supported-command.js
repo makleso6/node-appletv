@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SupportedCommand = void 0;
 class SupportedCommand {
     constructor(command, enabled, canScrub) {
         this.command = command;
@@ -26,4 +27,4 @@ exports.SupportedCommand = SupportedCommand;
         Command["NextInContext"] = "NextInContext";
         Command["PreviousInContext"] = "PreviousInContext";
     })(Command = SupportedCommand.Command || (SupportedCommand.Command = {}));
-})(SupportedCommand = exports.SupportedCommand || (exports.SupportedCommand = {}));
+})(SupportedCommand || (exports.SupportedCommand = SupportedCommand = {}));

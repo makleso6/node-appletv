@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SRPClientSession = void 0;
 const tweetnacl = require("tweetnacl");
 const base_1 = require("./base");
 const encryption_1 = require("../../util/encryption");

@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events';
 import { TVServer, Client } from '../tvserver';
 import { KeyPair } from '../credentials-store';

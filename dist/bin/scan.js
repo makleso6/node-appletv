@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.scan = scan;
 const inquirer_1 = require("inquirer");
 const ora = require("ora");
 const browser_1 = require("../lib/browser");
@@ -17,7 +18,7 @@ function scan(logger, timeout, uniqueIdentifier) {
             throw new Error("No Apple TVs found on the network. Try again.");
         }
         else {
-            return inquirer_1.prompt([{
+            return (0, inquirer_1.prompt)([{
                     type: 'list',
                     name: 'device',
                     message: 'Which Apple TV would you like to pair with?',
@@ -35,4 +36,3 @@ function scan(logger, timeout, uniqueIdentifier) {
         }
     });
 }
-exports.scan = scan;

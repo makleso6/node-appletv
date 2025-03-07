@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PairingClient = void 0;
 const events_1 = require("events");
 const tweetnacl = require("tweetnacl");
 const srp_1 = require("./srp");

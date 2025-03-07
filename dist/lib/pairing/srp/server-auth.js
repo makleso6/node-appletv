@@ -1,11 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SRPServerAuth = void 0;
 const srp = require("fast-srp-hap");
 const crypto = require("crypto");
 const tweetnacl = require("tweetnacl");
 const base_1 = require("./base");
 const encryption_1 = require("../../util/encryption");
 class SRPServerAuth extends base_1.SRPBase {
+    get serverProof() {
+        return this.srp.computeM2();
+    }
     constructor(pairingId, keyPair, password) {
         super();
         this.pairingId = pairingId;
@@ -16,9 +20,6 @@ class SRPServerAuth extends base_1.SRPBase {
         this.seed = crypto.randomBytes(32);
         this.srp = new srp.Server(srp.params[3072], this.salt, this.username, Buffer.from(password), this.privateKey);
         this.sessionPublicKey = this.srp.computeB();
-    }
-    get serverProof() {
-        return this.srp.computeM2();
     }
     setClientSessionPublicKey(publicKey) {
         this.srp.setA(publicKey);

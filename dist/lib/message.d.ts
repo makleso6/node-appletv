@@ -9,7 +9,7 @@ export declare class Message {
     toObject(): any;
     toString(): string;
 }
-export declare module Message {
+export declare namespace Message {
     enum Type {
         SendCommandMessage = 1,
         CommandResultMessage = 2,

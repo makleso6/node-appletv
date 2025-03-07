@@ -17,15 +17,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Tag = {
     PairingMethod: 0x00,
     Username: 0x01,
-    Salt: 0x02,
+    Salt: 0x02, // salt is 16 bytes long
     // could be either the SRP client public key (384 bytes) or the ED25519 public key (32 bytes), depending on context
     PublicKey: 0x03,
-    Proof: 0x04,
+    Proof: 0x04, // 64 bytes
     EncryptedData: 0x05,
     Sequence: 0x06,
     ErrorCode: 0x07,
     BackOff: 0x08,
-    Signature: 0x0A,
+    Signature: 0x0A, // 64 bytes
     MFiCertificate: 0x09,
     MFiSignature: 0x0A
 };

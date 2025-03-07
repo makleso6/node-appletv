@@ -90,13 +90,13 @@ describe('apple tv communication', function () {
         });
     });
     it('should press and release menu', function () {
-        var _a, _b, _c, _d;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b, _c, _d;
             yield client.sendKeyCommand(appletv_1.AppleTV.Key.Menu);
-            chai_1.expect((_a = messages.client.sent[0]) === null || _a === void 0 ? void 0 : _a.type).to.equal(message_1.Message.Type.SendHidEventMessage);
-            chai_1.expect((_b = messages.client.sent[1]) === null || _b === void 0 ? void 0 : _b.type).to.equal(message_1.Message.Type.SendHidEventMessage);
-            chai_1.expect((_c = messages.server.received[0]) === null || _c === void 0 ? void 0 : _c.type).to.equal(message_1.Message.Type.SendHidEventMessage);
-            chai_1.expect((_d = messages.server.received[1]) === null || _d === void 0 ? void 0 : _d.type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)((_a = messages.client.sent[0]) === null || _a === void 0 ? void 0 : _a.type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)((_b = messages.client.sent[1]) === null || _b === void 0 ? void 0 : _b.type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)((_c = messages.server.received[0]) === null || _c === void 0 ? void 0 : _c.type).to.equal(message_1.Message.Type.SendHidEventMessage);
+            (0, chai_1.expect)((_d = messages.server.received[1]) === null || _d === void 0 ? void 0 : _d.type).to.equal(message_1.Message.Type.SendHidEventMessage);
         });
     });
 });
